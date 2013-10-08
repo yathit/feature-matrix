@@ -2,13 +2,25 @@
 
 /* Services */
 
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
+// Database service
 angular.module('myApp.services', [])
-    .value('version', '0.1');
+    .factory('database', function() {
+      var schema = {
+        stores: [{
+          name: 'ydn-db',
+          indexes: [{
+            keyPath: 'platform'
+          }, {
+            keyPath: 'browser'
+          }]
+        }]
+      };
+      var db = new ydn.db.Storage('feature-matrix', schema);
+      db.addEventListener('ready', function(e) {
 
-
-// Database service.
-angular.module('myApp.database', [])
-    .value('version', ydn.db.version);
+      }, false, this);
+      return {
+        version: ydn.db.version,
+        db: db
+      };
+    });

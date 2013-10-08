@@ -4,8 +4,8 @@
 
 
 angular.module('myApp.directives', []).
-  directive('appVersion', ['version', function(version) {
+  directive('appVersion', ['database', function(database) {
     return function(scope, elm, attrs) {
-      elm.text(version);
+      elm.text(database.version);
     };
   }]);
