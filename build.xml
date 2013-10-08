@@ -1,0 +1,33 @@
+<project name="feature-matrix" basedir=".">
+    <dirname property="fm.dir" file="${ant.file.feature-matrix}"/>
+    <property name="work.dir" location="${fm.dir}/.." />
+    <property name="app.dir" location="${fm.dir}/app" />
+    <condition property="gsutil" value="D:/opt/gsutil/gsutil"><os family="windows"/></condition>
+    <condition property="gsutil" value="/Users/kyawtun/opt/gsutil/gsutil"><os family="unix"/></condition>
+    <target name="push-js" description="upload distribution">
+
+        <apply executable="python" relative="yes">
+            <arg value="${gsutil}"/>
+            <arg value="cp"/>
+            <fileset dir="${app.dir}" includes="js/*.js"/>
+            <srcfile prefix="${app.dir}/"/>
+            <targetfile prefix="gs://dev.yathit.com/demo/feature-matrix/"/>
+            <identitymapper></identitymapper>
+        </apply>
+    </target>
+    <target name="push" description="upload distribution" depends="push-js">
+        <replace description="replace angular"
+                 file="${app.dir}/index.html"
+                 token="lib/angular/angular.js"
+                 value="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"/>
+        <apply executable="python" relative="yes">
+            <arg value="${gsutil}"/>
+            <arg value="cp"/>
+            <fileset dir="${app.dir}" includes="css/*.css"/>
+            <fileset dir="${app.dir}" includes="*.html"/>
+            <srcfile prefix="${app.dir}/"/>
+            <targetfile prefix="gs://dev.yathit.com/demo/feature-matrix/"/>
+            <identitymapper></identitymapper>
+        </apply>
+    </target>
+</project>
