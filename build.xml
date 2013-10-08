@@ -16,6 +16,10 @@
         </apply>
     </target>
     <target name="push" description="upload distribution" depends="push-js">
+        <replace description="replace lib js"
+                 file="${app.dir}/index.html"
+                 token="lib/ydn.db-dev.js"
+                 value="/jsc/ydn.db-dev.js"/>
         <replace description="replace angular"
                  file="${app.dir}/index.html"
                  token="lib/angular/angular.js"
