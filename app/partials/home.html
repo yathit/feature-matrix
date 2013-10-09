@@ -1,6 +1,30 @@
-<h3>YDN-DB feature matrix from test results</h3>
+<h3>feature matrix from test results</h3>
 
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+
+<table>
+    <thead>
+    <tr>
+        <td>Platform</td>
+        <td>Browser</td>
+        <td>CRUD</td>
+        <td>Cursor</td>
+        <td>Event</td>
+        <td>Transaction</td>
+        <td>Query</td>
+        <td>SQL</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="resultSet in results">
+        <td>{{resultSet.platform}}</td>
+        <td>{{resultSet.browser}} - {{resultSet.version}}</td>
+
+        <td><span result-view name="crud"></span></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
