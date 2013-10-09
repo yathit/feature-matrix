@@ -8,12 +8,14 @@ describe('filter', function() {
 
   describe('interpolate', function() {
     beforeEach(module(function($provide) {
-      $provide.value('version', 'TEST_VER');
+      $provide.factory('database', function() {
+        return {version: ydn.db.version};
+      });
     }));
 
 
     it('should replace VERSION', inject(function(interpolateFilter) {
-      expect(interpolateFilter('before %VERSION% after')).toEqual('before TEST_VER after');
+      expect(interpolateFilter('before %VERSION% after')).toEqual('before 0.8.2 after');
     }));
   });
 });
