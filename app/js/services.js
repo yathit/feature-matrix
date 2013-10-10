@@ -112,34 +112,32 @@ angular.module('myApp.services', [])
             ],
             Sync: {
               format: 'gcs',
-              metaDataName: 'meta',
+              metaStoreName: 'ydn-db-meta',
               keepMeta: true,
               Options: {
                 bucket: 'ydn-test-report-2',
                 prefix: 'ydn-db/'
               }
             }
-          }
-        ]
+          }, {
+            name: 'ydn-db-meta',
+            indexes: [
+              {
+                keyPath: 'platform'
+              },
+              {
+                keyPath: 'browser'
+              },
+              {
+                keyPath: 'version'
+              }]
+          }]
       };
       return new ydn.db.Storage('feature-matrix', schema);
     })
     .factory('gapi', function($q, $rootScope) {
 
       var bucket = 'ydn-test-report-2';
-      var getObject = function(name) {
-        var path = 'http://' + bucket + '.storage.googleapis.com/' + name;
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', path, true);
-        xhr.onload = function(e) {
-          // console.log(e.target.response);
-          // console.log(e.target.responseText);
-          var obj = JSON.parse(e.target.responseText);
-          console.log(obj);
-          cb(obj);
-        };
-        xhr.send();
-      };
       var list = function() {
         var df = $q.defer();
         var results = [];
