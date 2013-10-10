@@ -111,25 +111,41 @@ angular.module('myApp.services', [])
               }
             ],
             Sync: {
-              format: 'gcs',
+              // 'gcs' refer to Google Cloud Storage backend
+              // GCS has tow API, one for XML (S3) and one for JSON
+              format: 'gcs-json',
+              // Name of store, where meta data are stored.
               metaStoreName: 'ydn-db-meta',
-              keepMeta: true,
+              // prefetch only 'meta', other possible is 'full'
+              prefetch: 'meta',
               Options: {
+                // GCS bucket name
                 bucket: 'ydn-test-report-2',
+                // path prefix for this store.
                 prefix: 'ydn-db/'
               }
             }
           }, {
             name: 'ydn-db-meta',
+            // require keyPath for GCS-JSON meta store
+            keyPath: 'name',
+            // index meta data in the header
             indexes: [
               {
+                // goog-meta-platform
                 keyPath: 'platform'
-              },
-              {
+              }, {
+                // goog-meta-browser
                 keyPath: 'browser'
-              },
-              {
+              }, {
+                // goog-meta-version
                 keyPath: 'version'
+              }, {
+                // required index for meta store.
+                keyPath: 'etag'
+              }, {
+                // required index for meta store.
+                keyPath: 'updated'
               }]
           }]
       };
