@@ -13,7 +13,10 @@ angular.module('myApp.controllers', [])
       $scope.results = utils.processResult(simple_result_data);
       // console.log($scope.results);
     }])
-    .controller('HomeCtrl', ['$scope', 'utils', 'database', function($scope, utils, database) {
-      $scope.results = utils.processResult(simple_result_data);
-      console.log($scope.results);
+    .controller('HomeCtrl', ['$scope', 'utils', 'database', 'gapi', function($scope, utils, database, gapi) {
+      gapi.list().then(function(json) {
+        console.log(json);
+        $scope.results = utils.processResult(json);
+      });
+
     }]);

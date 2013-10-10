@@ -41,11 +41,20 @@ angular.module('myApp.services', [])
             rows.splice(i, 0, row);
             return row;
           };
+      var normalizeSuiteName = function(name) {
+        name = name.toLowerCase();
+        if (name == 'iterator') {
+          name = 'cursor';
+        } else if (name == 'workflow') {
+          name = 'transaction';
+        }
+        return name;
+      };
       var addResult = function(row, suite_name, name, result) {
         if (!result) {
           return;
         }
-        suite_name = suite_name.toLowerCase();
+        suite_name = normalizeSuiteName(suite_name);
         if (!row[suite_name]) {
           row[suite_name] = {};
         }
@@ -107,8 +116,61 @@ angular.module('myApp.services', [])
       }, false, this);
       return db;
     })
-    .factory('list', function(db) {
-      return db.values('ydn-db', null, 100, false);
+    .factory('gapi', function($q, $rootScope) {
+
+      var bucket = 'ydn-test-report-2';
+      var getObject = function(name) {
+        var path = 'http://' + bucket + '.storage.googleapis.com/' + name;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', path, true);
+        xhr.onload = function(e) {
+          // console.log(e.target.response);
+          // console.log(e.target.responseText);
+          var obj = JSON.parse(e.target.responseText);
+          console.log(obj);
+          cb(obj);
+        };
+        xhr.send();
+      };
+      var list = function() {
+        var df = $q.defer();
+        var results = [];
+        gapiLoader.onReady(function() {
+          var req = gapi.client.storage.objects.list({
+            'bucket': bucket,
+            'prefix': 'ydn-db/0.8.2/',
+            'maxResults': '10'
+          });
+          req.execute(function(json) {
+            console.log(json);
+            // Note: gapi client don't support rpc batch
+            var qs = [];
+            for (var i = 0; i < json.items.length; i++) {
+              var path = 'http://' + bucket + '.storage.googleapis.com/' + json.items[i].name;
+              // console.log(path);
+              var xhr = new XMLHttpRequest();
+              xhr.open('GET', path, true);
+              xhr.onload = function(e) {
+                // console.log(e.target.response);
+                // console.log(e.target.responseText);
+                var obj = JSON.parse(e.target.responseText);
+                // console.log(obj);
+                results.push(obj);
+                if (results.length >= json.items.length) {
+                  df.resolve(results);
+                  $rootScope.$apply();
+                }
+              };
+              xhr.send();
+            }
+          });
+        });
+        // return db.values('ydn-db', null, 100, false);
+        return df.promise;
+      };
+      return {
+        list: list
+      };
     });
 
 
