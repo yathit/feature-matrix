@@ -1,9 +1,15 @@
 'use strict';
 
+var myApp = angular.module('myApp', [
+  'ngRoute',
+  'myApp.filters',
+  'myApp.services',
+  'myApp.directives',
+  'myApp.controllers'
+]);
 
-// Declare app level module which depends on filters, and services
-angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 'myApp.controllers']).
-  config(['$routeProvider', function($routeProvider) {
+myApp.config(['$routeProvider',
+  function($routeProvider) {
     $routeProvider.when('/about', {templateUrl: 'partials/about.html', controller: 'AboutCtrl'});
     $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl'});
     $routeProvider.when('/my-result', {templateUrl: 'partials/my-result.html', controller: 'MyResultCtrl'});

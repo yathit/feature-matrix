@@ -7,15 +7,23 @@ angular.module('myApp.controllers', [])
     .controller('AboutCtrl', [function() {
 
     }])
-    .controller('MyResultCtrl', ['$scope', 'utils', 'database', function($scope, utils, database) {
+    .controller('MyResultCtrl', ['$scope', 'utils', function($scope, utils) {
+      var data = localStorage['test-ydn-db::results'];
+      if (data) {
+        var json = JSON.parse(data);
+        $scope.results = utils.processResult(json);
+      }
 
-      // console.log(database.sampleData);
-      $scope.results = utils.processResult(simple_result_data);
-      // console.log($scope.results);
     }])
     .controller('HomeCtrl', ['$scope', 'utils', 'database', 'gapi', function($scope, utils, database, gapi) {
-      gapi.list().then(function(json) {
-        console.log(json);
+      var promise = gapi.list();
+      promise.then(function(json) {
+        // console.log(json);
+        $scope.results = utils.processResult(json);
+      }, function(e) {
+        throw e;
+      }, function(json) {
+        // console.log(json);
         $scope.results = utils.processResult(json);
       });
 

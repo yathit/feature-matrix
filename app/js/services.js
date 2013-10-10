@@ -73,6 +73,9 @@ angular.module('myApp.services', [])
           var row = insertRow(rows, result.platform, result.browser, result.version);
           for (var j = 0; j < result.testResults.length; j++) {
             var suites = result.testResults[j].suites;
+            if (!suites) {
+              continue;
+            }
             for (var k = 0; k < suites.length; k++) {
               var suite = suites[k];
               for (var m = 0; m < suite.specs.length; m++) {
@@ -106,15 +109,20 @@ angular.module('myApp.services', [])
               {
                 keyPath: ['platform', 'browser', 'version']
               }
-            ]
+            ],
+            Sync: {
+              format: 'gcs',
+              metaDataName: 'meta',
+              keepMeta: true,
+              Options: {
+                bucket: 'ydn-test-report-2',
+                prefix: 'ydn-db/'
+              }
+            }
           }
         ]
       };
-      var db = new ydn.db.Storage('feature-matrix', schema);
-      db.addEventListener('ready', function(e) {
-
-      }, false, this);
-      return db;
+      return new ydn.db.Storage('feature-matrix', schema);
     })
     .factory('gapi', function($q, $rootScope) {
 
@@ -156,6 +164,7 @@ angular.module('myApp.services', [])
                 var obj = JSON.parse(e.target.responseText);
                 // console.log(obj);
                 results.push(obj);
+                df.notify(results);
                 if (results.length >= json.items.length) {
                   df.resolve(results);
                   $rootScope.$apply();

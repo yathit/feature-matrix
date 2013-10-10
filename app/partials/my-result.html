@@ -1,29 +1,29 @@
 <h3>My Test Results</h3>
 
-
 <table>
-<thead>
-<tr>
-    <td>Platform</td>
-    <td>Browser</td>
-    <td>CRUD</td>
-    <td>Cursor</td>
-    <td>Event</td>
-    <td>Transaction</td>
-    <td>Query</td>
-    <td>SQL</td>
-</tr>
-</thead>
-<tbody>
-    <tr ng-repeat="result in results">
-      <td>{{result.platform}}</td>
-      <td>{{result.browser}} {{result.version}}</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <thead>
+    <tr>
+        <td>Platform</td>
+        <td>Browser</td>
+        <td>CRUD</td>
+        <td>Cursor</td>
+        <td>Event</td>
+        <td>Transaction</td>
+        <td>Query</td>
+        <td>SQL</td>
     </tr>
-</tbody>
+    </thead>
+    <tbody>
+    <tr ng-repeat="resultSet in results">
+        <td>{{resultSet.platform}}</td>
+        <td>{{resultSet.browser}} - {{resultSet.version}}</td>
+        <td><span result-view name="crud" ></span></td>
+        <td><span result-view name="cursor"  ></span></td>
+        <td><span result-view name="event"  ></span></td>
+        <td><span result-view name="transaction"  ></span></td>
+        <td><span result-view name="query"  ></span></td>
+        <td><span result-view name="sql"  ></span></td>
+    </tr>
+    </tbody>
 </table>
 
