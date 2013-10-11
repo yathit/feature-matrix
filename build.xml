@@ -10,20 +10,21 @@
             <arg value="${gsutil}"/>
             <arg value="cp"/>
             <fileset dir="${app.dir}" includes="js/*.js"/>
+            <fileset dir="${app.dir}" includes="lib/angular/*.js"/>
             <srcfile prefix="${app.dir}/"/>
             <targetfile prefix="gs://dev.yathit.com/demo/feature-matrix/"/>
             <identitymapper></identitymapper>
         </apply>
     </target>
     <target name="push" description="upload distribution" depends="push-js">
-        <replace description="replace lib js"
+      <!--  <replace description="replace lib js"
                  file="${app.dir}/index.html"
                  token="lib/ydn.db-dev.js"
                  value="/jsc/ydn.db-dev.js"/>
         <replace description="replace angular"
                  file="${app.dir}/index.html"
                  token="lib/angular/angular.js"
-                 value="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"/>
+                 value="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"/>-->
         <apply executable="python" relative="yes">
             <arg value="${gsutil}"/>
             <arg value="cp"/>
