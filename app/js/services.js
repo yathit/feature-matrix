@@ -70,10 +70,14 @@ angular.module('myApp.services', [])
         var rows = [];
         for (var i = 0; i < results.length; i++) {
           var result = results[i];
+          if (!result) {
+            continue;
+          }
           var row = insertRow(rows, result.platform, result.browser, result.version);
           for (var j = 0; j < result.testResults.length; j++) {
             var suites = result.testResults[j].suites;
             if (!suites) {
+              // console.log(result);
               continue;
             }
             for (var k = 0; k < suites.length; k++) {
@@ -96,33 +100,16 @@ angular.module('myApp.services', [])
         stores: [
           {
             name: 'ydn-db',
-            indexes: [
-              {
-                keyPath: 'platform'
-              },
-              {
-                keyPath: 'browser'
-              },
-              {
-                keyPath: 'version'
-              },
-              {
-                keyPath: ['platform', 'browser', 'version']
-              }
-            ],
             Sync: {
               // 'gcs' refer to Google Cloud Storage backend
               // GCS has tow API, one for XML (S3) and one for JSON
-              format: 'gcs-json',
+              format: 'gcs',
+              // immutable database
+              immutable: true,
               // Name of store, where meta data are stored.
-              metaStoreName: 'ydn-db-meta',
-              // prefetch only 'meta', other possible is 'full'
-              prefetch: 'meta',
               Options: {
                 // GCS bucket name
-                bucket: 'ydn-test-report-2',
-                // path prefix for this store.
-                prefix: 'ydn-db/'
+                bucket: 'ydn-test-report-2'
               }
             }
           }, {
@@ -132,13 +119,13 @@ angular.module('myApp.services', [])
             // index meta data in the header
             indexes: [
               {
-                // goog-meta-platform
+                // x-goog-meta-platform
                 keyPath: 'platform'
               }, {
-                // goog-meta-browser
+                // x-goog-meta-browser
                 keyPath: 'browser'
               }, {
-                // goog-meta-version
+                // x-goog-meta-version
                 keyPath: 'version'
               }, {
                 // required index for meta store.
@@ -146,7 +133,35 @@ angular.module('myApp.services', [])
               }, {
                 // required index for meta store.
                 keyPath: 'updated'
-              }]
+              },
+              {
+                // use compound index, so that we can query unique quickly
+                name: 'platform, browser',
+                keyPath: ['metadata.platform', 'metadata.browser']
+              },
+              {
+                // use compound index, so that we can query unique quickly
+                name: 'platform, browser, version',
+                keyPath: ['metadata.platform', 'metadata.browser', 'metadata.version']
+              }],
+            Sync: {
+              // 'gcs' refer to Google Cloud Storage backend
+              // 'gcs-meta' sync option format store only meta data of the
+              // object. The key must be generate in descending order.
+              format: 'gcs-meta',
+              // prefetch only 'meta', other possible is 'full'
+              // 'meta' is default for 'gcs-meta' sync format.
+              prefetch: 'meta',
+              // Prefetch refractory period interval in milliseconds.
+              // Default is 5000.
+              prefetchRefractoryPeriod: 60 * 1000,
+              Options: {
+                // GCS bucket name
+                bucket: 'ydn-test-report-2',
+                // path prefix for this store.
+                prefix: 'ydn-db/'
+              }
+            }
           }]
       };
       return new ydn.db.Storage('feature-matrix', schema);
