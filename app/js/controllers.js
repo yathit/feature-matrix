@@ -16,6 +16,7 @@ angular.module('myApp.controllers', [])
 
     }])
     .controller('HomeCtrl', ['$scope', 'utils', 'database', function($scope, utils, db) {
+      console.log('home co')
       var index_name = 'platform, browser';
       var key_range = null;
       var limit = 200;
@@ -24,7 +25,7 @@ angular.module('myApp.controllers', [])
       var unique = true;
       db.keys('ydn-db-meta', index_name, key_range, limit, offset, reverse, unique)
           .then(function(keys) {
-            // console.log(keys);
+            console.log(keys);
             var req = db.values('ydn-db', keys);
             req.then(function(json) {
               // console.log(json);
@@ -35,17 +36,5 @@ angular.module('myApp.controllers', [])
               throw e;
             }, this);
           });
-    }])
-    .controller('GapiCtrl', ['$scope', 'utils', 'gapi', function($scope, utils, gapi) {
-      var promise = gapi.list();
-      promise.then(function(json) {
-        // console.log(json);
-        $scope.results = utils.processResult(json);
-      }, function(e) {
-        throw e;
-      }, function(json) {
-        // console.log(json);
-        $scope.results = utils.processResult(json);
-      }, this);
     }]);
 
