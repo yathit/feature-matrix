@@ -39,8 +39,9 @@
         </apply>
     </target>
     <target name="up" description="upload">
-        <echo>gsutil cp app/js/controllers.js gs://dev.yathit.com/demo/feature-matrix/app/js/</echo>
-        <echo>gsutil cp app/partials/home.html gs://dev.yathit.com/demo/feature-matrix/app/partials/</echo>
+        <echo>gsutil cp app/css/app.js gs://dev.yathit.com/demo/feature-matrix/css/</echo>
+        <echo>gsutil cp app/js/controllers.js gs://dev.yathit.com/demo/feature-matrix/js/</echo>
+        <echo>gsutil cp app/partials/home.html gs://dev.yathit.com/demo/feature-matrix/partials/</echo>
     </target>
    <target name="push" description="upload distribution" depends="push-js,push-html">
      <replace description="replace lib js"
