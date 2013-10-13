@@ -54,7 +54,10 @@ angular.module('myApp.controllers', [])
                 var versions = [];
                 var rows = {};
                 for (var i = 0; i < json.length; i++) {
-                  versions[i] = json[i].version;
+                  versions[i] = {
+                    url: 'http://ydn-test-report-2.storage.googleapis.com/' + keys[i],
+                    value: json[i].version
+                  };
                   for (var j = 0; j < json[i].testResults.length; j++) {
                     var result = json[i].testResults[j];
                     if (result.name == params.module) {

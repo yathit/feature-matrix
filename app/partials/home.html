@@ -37,7 +37,9 @@
             <td colspan="detail.versions.length">Version</td>
         </tr>
         <tr>
-            <td ng-repeat="version in detail.versions">{{version}}</td>
+            <td ng-repeat="version in detail.versions">
+                <a href="{{version.url}}">{{version.value}}</a>
+            </td>
         </tr>
         </thead>
         <tbody>
@@ -45,8 +47,9 @@
             <td>{{row.suite}}</td>
             <td>{{row.description}}</td>
             <td ng-repeat="col in row.cols" title="{{col.passedCount}} of {{col.totalCount}} passed.">
-                <span class="{status}"></span>
-                col.status
+                <span ng-class="col.status">
+                {{col.status}}
+                </span>
             </td>
         </tr>
         </tbody>
