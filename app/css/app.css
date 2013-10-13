@@ -28,3 +28,30 @@
   content: "";
   padding: 0;
 }
+
+.hide {
+    display: none;
+}
+
+
+.module {
+    min-width: 3em;
+}
+
+.suite {
+    margin-left: 3em;
+    min-width: 3em;
+}
+
+.spec {
+    margin-left: 6em;
+    min-width: 3em;
+}
+
+.spec .pass {
+    background-color: lightgreen;
+}
+
+.spec .fail {
+    background-color: #ff0000;
+}

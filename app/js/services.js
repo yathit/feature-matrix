@@ -165,6 +165,14 @@ angular.module('myApp.services', [])
           }]
       };
       return new ydn.db.Storage('feature-matrix', schema);
-    });
+    })
+    .factory('gapi', ['$q', '$rootScope', function($q, $rootScope) {
+      var df = $q.defer();
+      gapiLoader.onReady(function() {
+        df.resolve();
+        $rootScope.$apply();
+      });
+      return df.promise;
+    }]);
 
 

@@ -1,29 +1,19 @@
 <h3>My Test Results</h3>
 
-<table>
-    <thead>
-    <tr>
-        <td>Platform</td>
-        <td>Browser</td>
-        <td>CRUD</td>
-        <td>Cursor</td>
-        <td>Event</td>
-        <td>Transaction</td>
-        <td>Query</td>
-        <td>SQL</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr ng-repeat="resultSet in results">
-        <td>{{resultSet.platform}}</td>
-        <td>{{resultSet.browser}} - {{resultSet.version}}</td>
-        <td><span result-view name="crud" ></span></td>
-        <td><span result-view name="cursor"  ></span></td>
-        <td><span result-view name="event"  ></span></td>
-        <td><span result-view name="transaction"  ></span></td>
-        <td><span result-view name="query"  ></span></td>
-        <td><span result-view name="sql"  ></span></td>
-    </tr>
-    </tbody>
-</table>
+
+<div class="my-result-list">
+    <div class="module" ng-repeat="(name, module) in results">
+        <div class="name">{{name}}</div>
+        <div class="suite" ng-repeat="suite in module.suites">
+            <div class="name">{{suite.name}}</div>
+            <div class="spec" ng-repeat="spec in suite.specs">
+                <div class="content">
+                    <span title="Duration">{{spec.duration}} ms</span> - <span name="pass count">{{spec.passedCount}}</span> / <span name="fail count">{{spec.totalCount}}</span> -
+                    <span ng-class="{pass: spec.passed}">{{spec.description}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
