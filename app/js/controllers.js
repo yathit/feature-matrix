@@ -72,7 +72,9 @@ angular.module('myApp.controllers', [])
                             };
                           }
                           var cols = rows[key].cols;
+                          var status = spec.passedCount == spec.totalCount ? 'passed' : 'failed';
                           cols.push({
+                            status: status,
                             passedCount: spec.passedCount,
                             totalCount: spec.totalCount
                           });

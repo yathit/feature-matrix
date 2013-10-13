@@ -44,7 +44,10 @@
         <tr ng-repeat="row in detail.rows">
             <td>{{row.suite}}</td>
             <td>{{row.description}}</td>
-            <td ng-repeat="col in row.cols">{{col.passedCount}}/{{col.totalCount}}</td>
+            <td ng-repeat="col in row.cols" title="{{col.passedCount}} of {{col.totalCount}} passed.">
+                <span class="{status}"></span>
+                col.status
+            </td>
         </tr>
         </tbody>
     </table>

@@ -33,6 +33,13 @@
     display: none;
 }
 
+.passed {
+    background-color: lightgreen;
+}
+
+.failed {
+    background-color: red;
+}
 
 .module {
     min-width: 3em;
