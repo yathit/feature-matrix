@@ -8,7 +8,9 @@
             <div class="name">{{suite.name}}</div>
             <div class="spec" ng-repeat="spec in suite.specs">
                 <div class="content">
-                    <span title="Duration">{{spec.duration}} ms</span> - <span name="pass count">{{spec.passedCount}}</span> / <span name="fail count">{{spec.totalCount}}</span> -
+                    <span title="Duration">{{spec.duration}} ms
+                    </span> - <span title="pass count">{{spec.passedCount}}
+                    </span> / <span title="fail count">{{spec.totalCount}}</span> -
                     <span ng-class="{pass: spec.passed}">{{spec.description}}</span>
                 </div>
             </div>

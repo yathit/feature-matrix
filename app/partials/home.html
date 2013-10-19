@@ -1,6 +1,6 @@
 <h3>feature matrix from test results</h3>
 
-<table>
+<table class="feature">
     <thead>
     <tr>
         <td width="20%">Platform</td>
@@ -17,12 +17,12 @@
     <tr ng-repeat="resultSet in results">
         <td>{{resultSet.platform}}</td>
         <td>{{resultSet.browser}} - {{resultSet.version}}</td>
-        <td><a result-view name="crud" ></a></td>
-        <td><a result-view name="cursor"  ></a></td>
-        <td><a result-view name="event"  ></a></td>
-        <td><a result-view name="transaction"  ></a></td>
-        <td><a result-view name="query"  ></a></td>
-        <td><a result-view name="sql"  ></a></td>
+        <td><span class="cell"><a result-view name="crud" ></a></span></td>
+        <td><span class="cell"><a result-view name="cursor"  ></a></span></td>
+        <td><span class="cell"><a result-view name="event"  ></a></span></td>
+        <td><span class="cell"><a result-view name="transaction"  ></a></span></td>
+        <td><span class="cell"><a result-view name="query"  ></a></span></td>
+        <td><span class="cell"><a result-view name="sql"  ></a></span></td>
     </tr>
     </tbody>
 </table>

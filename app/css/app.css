@@ -33,6 +33,13 @@
     display: none;
 }
 
+.cell {
+    max-width: 6em;
+    max-height: 1.2em;
+    display: block;
+    overflow: hidden;
+}
+
 .passed {
     background-color: lightgreen;
 }

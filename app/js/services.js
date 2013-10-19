@@ -64,7 +64,8 @@ angular.module('myApp.services', [])
           suite[name] = [];
         }
         suite[name].push(result);
-        // console.log(suite_name + ' ' + name + ' ' + suite[name].length);
+        console.log(result);
+        console.log(suite_name + ' ' + name + ' ' + suite[name].length);
       };
       var processResult = function(results) {
         var rows = [];
