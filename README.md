@@ -149,8 +149,37 @@ keep in separate object store as follow:
 An angular controller for database query
 ----------------------------------------
 
-The job of a controller is preparing data to display in view. This involve
-querying to the database and formatting model data to suitable for rendering
+The job of a controller is preparing data to display in view. This involves
+querying from the database and formatting the result into model data suitable for rendering
 them in views.
 
-See [The demo app](http://dev.yathit.com/demo/feature-matrix/index.html)
+The home page of this app is feature matrix of unit test result from unique set of browsers.
+To query unique browser, a compound index `platform, browser` is created on
+`ydn-db-meta` store. IndexedDB API allow unique secondary key, which return
+list of primary keys. Since we keep primary key the same for both `ydn-db-meta`
+and `ydn-db`, it is used to retrieve result set from `ydn-db` object store.
+
+    angular.module('myApp.controllers', [])
+        .controller('HomeCtrl', ['$scope', 'utils', 'database', function($scope, utils, db) {
+          var index_name = 'platform, browser';
+          var key_range = null;
+          var limit = 50;
+          var offset = 0;
+          var reverse = false;
+          var unique = true;
+          db.keys('ydn-db-meta', index_name, key_range, limit, offset, reverse, unique)
+              .then(function(keys) { // list of primary key for unique browser
+                var req = db.values('ydn-db', keys);
+                req.then(function(json) {
+                  $scope.results = utils.processResult(json);
+                  $scope.$apply();
+                }, function(e) {
+                  throw e;
+                }, this);
+              });
+        }])
+
+The app
+-------
+
+[The demo app](http://dev.yathit.com/demo/feature-matrix/index.html)
