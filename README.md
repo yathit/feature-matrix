@@ -110,29 +110,21 @@ keep in separate object store as follow:
         name: 'ydn-db-meta',
         keyPath: 'name',
         // index meta data in the header
-        indexes: [
-          {
-            // x-goog-meta-platform
-            keyPath: 'platform'
+        indexes: [{
+            keyPath: 'platform' // x-goog-meta-platform
           }, {
-            // x-goog-meta-browser
-            keyPath: 'browser'
+            keyPath: 'browser' // x-goog-meta-browser
           }, {
-            // x-goog-meta-version
-            keyPath: 'version'
+            keyPath: 'version' // x-goog-meta-version
           }, {
-            // required index for meta store.
-            keyPath: 'etag'
+            keyPath: 'etag' // required index for 'ydn-db' store conditional request.
           }, {
-            // required index for meta store.
             keyPath: 'updated'
-          },
-          {
+          }, {
             // use compound index, so that we can query unique quickly
             name: 'platform, browser',
             keyPath: ['metadata.platform', 'metadata.browser']
-          },
-          {
+          }, {
             // use compound index, so that we can query unique quickly
             name: 'platform, browser, version',
             keyPath: ['metadata.platform', 'metadata.browser', 'metadata.version']
@@ -145,12 +137,10 @@ keep in separate object store as follow:
           // 'meta' is default for 'gcs-meta' sync format.
           prefetch: 'meta',
           // Prefetch refractory period interval in milliseconds.
-          // Default is 5000.
-          prefetchRefractoryPeriod: 60 * 1000,
+          prefetchRefractoryPeriod: 60 * 1000, // Default is 5000.
           Options: {
             bucket: 'ydn-test-report-2',
-            // path prefix for this store.
-            prefix: 'ydn-db/'
+            prefix: 'ydn-db/'  // path prefix for this store.
           }
         }
       }]
