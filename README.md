@@ -10,8 +10,10 @@ accept anonymous write request from selected origins.
 
 The second part is angular js app, which query unit test results and display the results.
 
-An angular service, for GCS backend
------------------------------------
+An angular service for GCS backend
+----------------------------------
+
+
 
 Database service is created simply by creating a singleton connection.
 
@@ -34,13 +36,10 @@ conditional request are made to the server.
       stores: [{
           name: 'ydn-db',
           Sync: {
-            // 'gcs' refer to Google Cloud Storage backend
-            format: 'gcs',
-            // immutable database
+            format: 'gcs', // refer to Google Cloud Storage backend
             immutable: true,
             Options: {
-              // GCS bucket name
-              bucket: 'ydn-test-report-2'
+              bucket: 'ydn-test-report-2' // GCS bucket name
             }
           }
       }]
@@ -50,8 +49,8 @@ conditional request are made to the server.
 
 One thing we concern here is cost. Unlike traditional backend server, which supply
 necessary HTML content, client side rendering using REST service is not efficient.
-Note that one REST GET request represent one result. In general, we will expect several thousands of
-result in the bucket. It is very important to query only necessary data just enough to display the first view.
+Note that one REST GET request represent one result.
+It is very important to query only necessary data just enough to display the first view.
 
 We use client side database to cache the data. Whenever a data is cached, it must be
 validated before used. In REST service, read request cache validation is made by
@@ -66,6 +65,9 @@ Once we have the data, it can be cached permanently. In YDN-DB, it is done by se
 `immutable` attribute to `true`.
 
 ### REST URI design for querying ###
+
+In general, we will expect several thousands of result in the bucket. It will be huge
+cost if we were to cached into client.
 
 Displaying the last results, say 25, make sense. In S3 like REST service, the only
 query available is ascending order of URI (or primary key). For query by last created data
