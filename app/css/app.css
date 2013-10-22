@@ -69,3 +69,7 @@
 .spec .fail {
     background-color: #ff0000;
 }
+
+.all-test-results td:not(:first-child) {
+    text-align: right;
+}

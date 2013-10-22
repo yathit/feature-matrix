@@ -7,25 +7,88 @@ angular.module('myApp.controllers', [])
     .controller('AboutCtrl', [function() {
 
     }])
-    .controller('AllTestCtrl', [function() {
-      var inject = function(fn) {
+    .controller('AllTestCtrl', ['$scope', 'utils', function($scope) {
+      var test_files = [
+        'is-crud.html',
+        'isw-core-cur.html',
+        'isw-core.html',
+        'isw-crud-e-text.html',
+        'isw-crud.html',
+        'isw-query-e-dev.html',
+        'isw-query.html',
+        'isw-sql-e-dev.html',
+        'isw-sql.html',
+        'iswu-crud-e-dev.html',
+        'iswu-crud.html'];
+      var base_url = '/ydn-db-sync/test/ydn-db/';
+      var inject = function() {
+        var fn = test_files.pop();
+        if (!fn) {
+          return;
+        }
+        localStorage.removeItem('test-ydn-db::results');
         var node = document.createElement('iframe');
-        node.width = "100%";
-        node.height = "1000px";
+        node.width = '100%';
+        node.height = '1000px';
         node.setAttribute('frameborder', '0');
-        node.src = fn;
+        node.src = base_url + fn;
+        var a = document.createElement('div');
+        a.style.cursor = 'pointer';
+        a.onclick = function(e) {
+          node.style.display = !node.style.display ? 'none' : '';
+          e.preventDefault();
+        };
+        a.textContent = fn;
+        a.href = '#' + fn;
+        document.body.appendChild(a);
         document.body.appendChild(node);
+        node.style.display = 'none';
         return node;
       };
-      window.addEventListener("storage", function(e) {
+      var results = {};
+      window.addEventListener('storage', function(e) {
         if (e.key == 'test-ydn-db::results') {
-          var name = e.url.match(/\w+\.html/)[0];
+          var name = e.url.match(/[^\/]+\.html/)[0];
           var value = JSON.parse(e.newValue);
-          console.log([name, value]);
+          var passed = 0;
+          var failed = 0;
+          var fl = [];
+          var pl = [];
+          for (var k in value) {
+            for (var i = 0; i < value[k].suites.length; i++) {
+              var specs = value[k].suites[i].specs;
+              var ps = '';
+              for (var j = 0; j < specs.length; j++) {
+                passed += specs[j].passedCount;
+                failed += specs[j].failedCount;
+                if (!specs[j].passed) {
+                  console.log(ps = specs[j]);
+                  ps = specs[j].description;
+                }
+              }
+              if (ps) {
+                fl.push(value[k].name + ',' + value[k].suites[i].name + ' ' + ps);
+              }
+            }
+          }
+          results[name] = {
+            url: e.url,
+            passedCount: passed,
+            failedCount: failed,
+            failedLabel: fl.join(', '),
+            passedLabel: pl.join(', '),
+            totalCount: passed + failed,
+            passed: failed == 0,
+            failed: failed != 0,
+            label: failed == 0 ? 'passed' : 'failed'
+          };
+          // console.log(results);
+          $scope.results = results;
+          $scope.$apply();
+          inject();
         }
       }, false);
-      var base_url = '/ydn-db-sync/test/ydn-db/';
-      inject(base_url + 'iswu-crud.html');
+      inject();
     }])
     .controller('MyResultCtrl', ['$scope', 'utils', function($scope, utils) {
       var data = localStorage['test-ydn-db::results'];
@@ -110,7 +173,7 @@ angular.module('myApp.controllers', [])
                 for (var key in rows) {
                   sortedRows.push(rows[key]);
                 }
-                sortedRows.sort(function (a, b) {
+                sortedRows.sort(function(a, b) {
                   return a.key > b.key ? 1 : -1;
                 });
                 for (var i = sortedRows.length - 2; i >= 0; i--) {

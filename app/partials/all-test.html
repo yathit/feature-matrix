@@ -1,9 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Automated Unit Test</title>
-</head>
-<body>
-<h3>Automated Unit Test</h3>
-</body>
-</html>
+
+<h3>Automated QUnit Test</h3>
+<div>
+    <table class="all-test-results">
+        <thead>
+        <tr>
+            <th>Test</th>
+            <th>Passed</th>
+            <th>Fail count</th>
+            <th>Passed count</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="module" ng-repeat="(name, result) in results">
+            <td><a href="{{result.url}}" target="_blank">{{name}}</a></td>
+            <td ng-class="{passed: result.passed}" ng-class="{failed: result.failed}">{{result.label}}</td>
+            <td title="{{result.failedLabel}}">{{result.failedCount}}</td>
+            <td title="{{result.passedLabel}}">{{result.passedCount}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <hr/>
+</div>
