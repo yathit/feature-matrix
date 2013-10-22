@@ -7,6 +7,26 @@ angular.module('myApp.controllers', [])
     .controller('AboutCtrl', [function() {
 
     }])
+    .controller('AllTestCtrl', [function() {
+      var inject = function(fn) {
+        var node = document.createElement('iframe');
+        node.width = "100%";
+        node.height = "1000px";
+        node.setAttribute('frameborder', '0');
+        node.src = fn;
+        document.body.appendChild(node);
+        return node;
+      };
+      window.addEventListener("storage", function(e) {
+        if (e.key == 'test-ydn-db::results') {
+          var name = e.url.match(/\w+\.html/)[0];
+          var value = JSON.parse(e.newValue);
+          console.log([name, value]);
+        }
+      }, false);
+      var base_url = '/ydn-db-sync/test/ydn-db/';
+      inject(base_url + 'iswu-crud.html');
+    }])
     .controller('MyResultCtrl', ['$scope', 'utils', function($scope, utils) {
       var data = localStorage['test-ydn-db::results'];
       if (data) {

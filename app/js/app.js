@@ -13,6 +13,7 @@ myApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.when('/about', {templateUrl: 'partials/about.html', controller: 'AboutCtrl'});
     $routeProvider.when('/test', {templateUrl: 'partials/test.html', controller: 'AboutCtrl'});
+    $routeProvider.when('/all-test', {templateUrl: 'partials/all-test.html', controller: 'AllTestCtrl'});
     $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: 'HomeCtrl',
       resolve: {'gapi': function(gapi) {
         return gapi;
