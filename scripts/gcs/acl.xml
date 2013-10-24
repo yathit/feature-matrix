@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<AccessControlList>
+    <Entries>
+        <Entry>
+            <Scope type="AllUsers"/>
+            <!-- yes, everybody can write to this buckey -->
+            <Permission>
+                WRITE
+            </Permission>
+        </Entry>
+        <Entry>
+            <Scope type="UserByEmail">
+                <!-- GAE proxy server -->
+                <EmailAddress>
+                    yit204@appspot.gserviceaccount.com
+                </EmailAddress>
+            </Scope>
+            <Permission>
+                WRITE
+            </Permission>
+        </Entry>
+    </Entries>
+</AccessControlList>
+

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CorsConfig>
+    <Cors>
+        <Origins>
+            <!--Update origin that want to access for this bucket-->
+            <Origin>http://dev.yathit.com</Origin>
+            <Origin>http://localhost/</Origin>
+        </Origins>
+        <Methods>
+            <Method>GET</Method>
+            <Method>HEAD</Method>
+            <Method>POST</Method>
+            <Method>PUT</Method>
+            <Method>DELETE</Method>
+        </Methods>
+        <ResponseHeaders>
+            <ResponseHeader>If-Modified-Since</ResponseHeader>
+            <ResponseHeader>If-Unmodified-Since</ResponseHeader>
+            <ResponseHeader>If-Match</ResponseHeader>
+            <ResponseHeader>If-None-Match</ResponseHeader>
+            <ResponseHeader>content-type</ResponseHeader>
+            <ResponseHeader>Authorization</ResponseHeader>
+            <ResponseHeader>x-goog-meta-platform</ResponseHeader>
+            <ResponseHeader>x-goog-meta-browser</ResponseHeader>
+            <ResponseHeader>x-goog-meta-version</ResponseHeader>
+        </ResponseHeaders>
+        <MaxAgeSec>60</MaxAgeSec>
+    </Cors>
+</CorsConfig>

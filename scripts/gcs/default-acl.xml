@@ -1,0 +1,34 @@
+<?xml version="1.0" ?>
+<AccessControlList>
+    <Entries>
+        <Entry>
+            <Scope type="AllUsers"/>
+            <Permission>
+                READ
+            </Permission>
+        </Entry>
+
+        <Entry>
+            <Scope type="UserByEmail">
+                <EmailAddress>
+                    yathit-api@appspot.gserviceaccount.com
+                </EmailAddress>
+            </Scope>
+            <Permission>
+                FULL_CONTROL
+            </Permission>
+        </Entry>
+
+        <Entry>
+            <Scope type="UserByEmail">
+                <EmailAddress>
+                    612642631247-b7om3oid21j89pqp7qnqqeekj0imv99o@developer.gserviceaccount.com
+                </EmailAddress>
+            </Scope>
+            <Permission>
+                FULL_CONTROL
+            </Permission>
+        </Entry>
+    </Entries>
+</AccessControlList>
+
