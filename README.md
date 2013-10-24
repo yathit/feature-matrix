@@ -15,6 +15,8 @@ Create account GCS and setup [gsutil](https://developers.google.com/storage/docs
 
 Change Google client api key in `app.js`.
 
+After that, you should be able to run main application `index.html`. `raw-index.html` require to setup all dependency repo, setting up closure compiler and building YDN-DB to run in raw mode.
+
 The app
 -------
 
