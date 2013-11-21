@@ -12,7 +12,7 @@ angular.module('myApp.controllers', [])
         'is-crud.html',
         'isw-core-cur.html',
         'isw-core.html',
-        'isw-crud-e-text.html',
+        'is-core-e-cur-qry-text-dev.html',
         'isw-crud.html',
         'isw-query-e-dev.html',
         'isw-query.html',
