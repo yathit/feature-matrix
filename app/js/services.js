@@ -108,7 +108,7 @@ angular.module('myApp.services', [])
               // Name of store, where meta data are stored.
               Options: {
                 // GCS bucket name
-                bucket: 'ydn-test-report-2'
+                bucket: 'ydn-test-report-3'
               }
             }
           }, {
