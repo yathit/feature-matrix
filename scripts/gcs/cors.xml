@@ -4,7 +4,9 @@
         <Origins>
             <!--Update origin that want to access for this bucket-->
             <Origin>http://dev.yathit.com</Origin>
-            <Origin>http://localhost/</Origin>
+            <Origin>http://yathit.github.io</Origin>
+            <Origin>https://yathit.github.io</Origin>
+            <Origin>http://localhost</Origin>
         </Origins>
         <Methods>
             <Method>GET</Method>
