@@ -4,6 +4,11 @@
     "role": "READER"
   },
   {
+    "email": "yathit-api@appspot.gserviceaccount.com",
+    "entity": "user-yathit-api@appspot.gserviceaccount.com",
+    "role": "OWNER"
+  },
+  {
     "entity": "allAuthenticatedUsers",
     "role": "WRITER"
   }
