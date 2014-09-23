@@ -138,7 +138,7 @@ angular.module('myApp.controllers', [])
                 var rows = {};
                 for (var i = 0; i < json.length; i++) {
                   versions[i] = {
-                    url: 'http://ydn-test-report-2.storage.googleapis.com/' + keys[i],
+                    url: 'http://ydn-test-report-3.storage.googleapis.com/' + keys[i],
                     value: json[i].version
                   };
                   for (var j = 0; j < json[i].testResults.length; j++) {
