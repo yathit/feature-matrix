@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="utf-8">
+  <title>YDN-DB Feature Matrix</title>
+  <link rel="stylesheet" href="css/app.css"/>
+    <script src="http://localhost/db-work/closure-library/closure/goog/base.js"></script>
+    <script src="http://localhost/db-work/ydn-base/src/deps.js"></script>
+    <script src="http://localhost/db-work/ydn/src/deps.js"></script>
+    <script src="http://localhost/db-work/ydn-db/src/deps.js"></script>
+    <script src="http://localhost/db-work/gdata/src/deps.js"></script>
+    <script src="http://localhost/db-work/ydn-db-sync/src/deps.js"></script>
+    <script type="text/javascript">
+        goog.require('ydn.debug');
+        goog.require('ydn.db.Storage');
+        goog.require('ydn.db.sync');
+    </script>
+    <script src="http://localhost/db-work/ydn-db/src/ydn/db/conn/exports.js"></script>
+    <script type="text/javascript">
+        ydn.debug.log('ydn.db', 'info');
+        ydn.debug.log('ydn.db.crud.req', 'finest');
+        // ydn.debug.log('ydn.db.sync', 'finest');
+    </script>
+</head>
+<body>
+  <ul class="menu">
+      <li><a href="#/home">Home</a></li>
+      <li><a href="#/my-result">My Results</a></li>
+      <li><a href="#/about">About</a></li>
+  </ul>
+
+  <div ng-view></div>
+
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-route.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+  <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=handleClientLoad"></script>
+</body>
+</html>
