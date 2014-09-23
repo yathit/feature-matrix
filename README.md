@@ -6,7 +6,7 @@ The purpose of this web application is to collect user unit test result and do s
 
 is web application has two parts. The first part is data collection. It is essentially running a qunit test and result are put to GCS service. The second part is angular js app, which query and fetch unit test results from GCS and display the results.
 
-See [blog post](http://dev.yathit.com/tutorial/angular-js-gcs-backend.html) for more detail.
+See [blog post](http://dev.yathit.com/ydn-db/doc/example/feature-matrix.html) for more detail.
 
 Setup
 
@@ -22,4 +22,4 @@ After that, you should be able to run main application `index.html`. `raw-index.
 The app
 -------
 
-[The demo app](http://dev.yathit.com/demo/feature-matrix/index.html)
+[The demo app](http://yathit.github.io/feature-matrix/app/index.html)
