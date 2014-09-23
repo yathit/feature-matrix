@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["http://dev.yathit.com", "http://yathit.github.io", "https://yathit.github.io", "http://localhost"],
+    "origin": ["http://dev.yathit.com", "https://dev.yathit.com",  "http://yathit.github.io", "https://yathit.github.io", "http://localhost"],
     "responseHeader": ["Content-Type", "If-Modified-Since", "If-Unmodified-Since", "If-Match", "If-None-Match", "Authorization", "x-goog-meta-platform", "x-goog-meta-browser", "x-goog-meta-version"],
     "method": ["GET", "HEAD", "POST", "PUT", "DELETE"],
     "maxAgeSeconds": 60
