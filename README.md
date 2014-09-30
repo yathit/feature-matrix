@@ -9,8 +9,6 @@ is web application has two parts. The first part is data collection. It is essen
 See [blog post](http://dev.yathit.com/ydn-db/doc/example/feature-matrix.html) for more detail.
 
 Setup
-
-
 -----
 
 Create account GCS and setup [gsutil](https://developers.google.com/storage/docs/gsutil). Go to `scripts/gcs` folder. Change permission and host name in cors.xml. Run `setup.sh` to create and setup bucket.
